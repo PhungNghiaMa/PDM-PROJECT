@@ -112,7 +112,7 @@ public class newframe2 extends JFrame {
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(newframe2.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=Bikestore;encrypt=false;user=sa;password=Nghia2910";
+                    String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=BikeStores;encrypt=false;user=sa;password=17012003";
                     try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
                         String Command = null;
                         if (isAdmin == true){
@@ -158,7 +158,7 @@ public class newframe2 extends JFrame {
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(newframe2.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=Bikestore;encrypt=false;user=sa;password=Nghia2910";
+                    String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=BikeStores;encrypt=false;user=sa;password=17012003";
                     try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
                         String Command = null;
                         if (isAdmin == true){
@@ -221,7 +221,7 @@ public class newframe2 extends JFrame {
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(newframe2.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=Bikestore;encrypt=false;user=sa;password=Nghia2910";
+                String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=BikeStores;encrypt=false;user=sa;password=17012003";
                 try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
                     String Command = null;
                     if (isAdmin == true){
@@ -290,23 +290,23 @@ public class newframe2 extends JFrame {
                     jLabel2.setText("Patient name:");
                     jLabel5.setText("LOGIN");
                     jLabel5.setFont(new Font("Calibre", Font.BOLD, 14));
-                    String name = jTextField3.getText();
 
                     // Add action listener to button
                     button4.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent evt) {
                             button1ActionPerformed(evt);
-                            System.out.println(name);
+                            String name = jTextField3.getText();
+
                             try {
 
                                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                             } catch (ClassNotFoundException ex) {
                                 Logger.getLogger(newframe2.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                            String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=Bikestore;encrypt=false;user=sa;password=Nghia2910";
+                            String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=BikeStores;encrypt=false;user=sa;password=17012003";
                             try (Connection con = DriverManager.getConnection(connectionUrl)) {
                                 //   String Command = "SELECT model_year, product_name,list_price from production.products WHERE product_name = ?";
-                                String Command = "SELECT model_year, product_name,list_price from production.products WHERE ltrim(rtrim(LOWER(product_name))) = LOWER(?)";
+                               String Command = "SELECT model_year, product_name,list_price from production.products WHERE ltrim(rtrim(LOWER(product_name))) = LOWER(?)";
                                 PreparedStatement pstmt = con.prepareStatement(Command);
                                 pstmt.setString(1, name); // Bind user input to parameter 1
                                 ResultSet rs = pstmt.executeQuery();
@@ -340,10 +340,10 @@ public class newframe2 extends JFrame {
 //                                    JOptionPane.showMessageDialog(null, "User not exist ! ");
 //                                }
                                 if(rs.next()){
-                                    JOptionPane.showMessageDialog(null,name + "login successful !");
+                                    JOptionPane.showMessageDialog(null,name + " login successful !");
                                 }
                                 else{
-                                    JOptionPane.showMessageDialog(null, "Invalid name");
+                                    JOptionPane.showMessageDialog(null,  "Invalid name");
                                 }
 
                             }catch (SQLException ex) {
