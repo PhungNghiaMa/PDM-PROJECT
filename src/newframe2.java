@@ -32,7 +32,7 @@ public class newframe2 extends JFrame {
      */
 
     public newframe2() {
-    //    Gradient_Frame GF = new Gradient_Frame();
+        //    Gradient_Frame GF = new Gradient_Frame();
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -114,7 +114,7 @@ public class newframe2 extends JFrame {
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(newframe2.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=HospitalManage;encrypt=false;user=sa;password=Nghia2910";
+                String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=IM1;encrypt=false;user=sa;password=Nghia2910";
                 try(Connection con = DriverManager.getConnection(connectionUrl) ; Statement stmt = con.createStatement()) {
                     String SQL = jTextField2.getText();
                     ResultSet rs = stmt.executeQuery(SQL);
@@ -170,7 +170,7 @@ public class newframe2 extends JFrame {
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(newframe2.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=HospitalManage;encrypt=false;user=sa;password=Nghia2910";
+                    String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=IM1;encrypt=false;user=sa;password=Nghia2910";
                     try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
                         String Command = null;
                         if (isAdmin == true){
@@ -201,7 +201,7 @@ public class newframe2 extends JFrame {
                         String[] colName = new String[cols];
                         for (int i = 0 ; i< cols ; i++){
                             colName[i] = rsmd.getColumnName(i+1);
-                       //     jTable1.getColumnModel().getColumn(i).setCellRenderer(centerRender );
+                            //     jTable1.getColumnModel().getColumn(i).setCellRenderer(centerRender );
                             System.out.println("Column " + i + ": " + colName[i]);
                         }
                         String a , b  , c , d , e, f,  g ,h , i ,j ;
@@ -236,7 +236,7 @@ public class newframe2 extends JFrame {
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(newframe2.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=HospitalManage;encrypt=false;user=sa;password=Nghia2910";
+                    String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=IM1;encrypt=false;user=sa;password=Nghia2910";
                     try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
                         String Command = null;
                         if (isAdmin == true){
@@ -293,73 +293,19 @@ public class newframe2 extends JFrame {
             }
         });
 
-        button2.setLabel("Department");
+        button2.setLabel("Transfer");
         button2.setBackground(Color.BLACK);
         button2.setForeground(Color.white);
         button2.setFocusable(false);
         button2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 button2ActionPerformed(evt);
-                try {
-                    // TODO add your handling code here:
-
-                    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(newframe2.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=HospitalManage;encrypt=false;user=sa;password=Nghia2910";
-                try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
-                    String Command = null;
-                    if (isAdmin == true){
-                        Command ="SELECT \n" +
-                                "e.Fal_ID AS 'Falculty_ID',\n"+
-                                "  e.Name AS 'Doctor_Name', d.Doctor_Degree, f.Fal_name AS 'Department'\n" +
-                                "FROM Doctor d\n" +
-                                "INNER JOIN Employee e ON d.ID = e.ID\n" +
-                                "INNER JOIN Faculty f ON e.Fal_ID = f.Fal_ID\n" +
-                                "ORDER BY  f.Fal_name , e.Fal_ID  ;";
-                    }
-                    if (isAdmin == false){
-                        Command ="SELECT \n" +
-                                "  e.Name AS 'Doctor_Name', f.Fal_name AS 'Department'\n" +
-                                "FROM Doctor d\n" +
-                                "INNER JOIN Employee e ON d.ID = e.ID\n" +
-                                "INNER JOIN Faculty f ON e.Fal_ID = f.Fal_ID\n" +
-                                "ORDER BY  f.Fal_name , e.Fal_ID  ;";
-                    }
-                    ResultSet rs = stmt.executeQuery(Command);
-                    ResultSetMetaData rsmd = rs.getMetaData();
-                    jTable1.setModel(DbUtils.resultSetToTableModel(rs));
-                    int cols = rsmd.getColumnCount();
-                    System.out.println("The number of colum: " + cols);
-                    String[] colName = new String[cols];
-                    for (int i = 0 ; i< cols ; i++){
-                        colName[i] = rsmd.getColumnName(i+1);
-                        //     jTable1.getColumnModel().getColumn(i).setCellRenderer(centerRender );
-                        System.out.println("Column " + i + ": " + colName[i]);
-                    }
-                    String a , b  , c , d , e, f,  g ,h , i ,j ;
-                    //  model.setColumnIdentifiers(colName);
-                    while(rs.next()){// phan de show data
-                        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-                        model.setColumnIdentifiers(colName);
-                        a = rs.getString(1);
-                        b = rs.getString(2);
-                        c = rs.getString(3);
-                        d = rs.getString(4);
-                        e = rs.getString(5);
-                        f = rs.getString(6);
-                        g = rs.getString(7);
-                        h = rs.getString(8);
-                        i = rs.getString(9);
-                        i = rs.getString(10);
-
-
-                        String[] row = { a , b , c ,d ,g ,f};
-                        model.addRow(row);
-                    }             } catch (SQLException ex) {
-                    Logger.getLogger(newframe2.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                IM2 im2 = new IM2();
+                JFrame frame = new JFrame();
+                frame.setSize(getWidth() , getHeight());
+                frame.add(im2);
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
             }
         });
 
@@ -377,7 +323,7 @@ public class newframe2 extends JFrame {
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(newframe2.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=HospitalManage;encrypt=false;user=sa;password=Nghia2910";
+                String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=IM1;encrypt=false;user=sa;password=Nghia2910";
                 try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
                     String Command = null;
                     if (isAdmin == true){
@@ -498,7 +444,7 @@ public class newframe2 extends JFrame {
                     isAdmin = false;
                     JFrame frame = new JFrame();
                     frame.setSize(500, 300);
-                     Gradient_Panel panel = new Gradient_Panel();
+                    Gradient_Panel panel = new Gradient_Panel();
                     JTextField jTextField3 = new JTextField();
                     jTextField3.setColumns(31);
                     JLabel jLabel2 = new JLabel();
@@ -509,7 +455,7 @@ public class newframe2 extends JFrame {
 
                     JButton button4 = new JButton("Login");
                     button4.setBackground(Color.black);
-                  //  button4.setFocusPainted(false);
+                    //  button4.setFocusPainted(false);
 
                     // Set properties
                     jLabel2.setText("Patient name:");
@@ -529,7 +475,7 @@ public class newframe2 extends JFrame {
                             } catch (ClassNotFoundException ex) {
                                 Logger.getLogger(newframe2.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                            String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=HospitalManage;encrypt=false;user=sa;password = Nghia2910";
+                            String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=IM1;encrypt=false;user=sa;password = Nghia2910";
                             try (Connection con = DriverManager.getConnection(connectionUrl) ; PreparedStatement pstmt = con.prepareStatement("SELECT Pname FROM Patient WHERE Pname = ?")) {
                                 pstmt.setString(1, name); // Bind user input to parameter 1
                                 ResultSet rs = pstmt.executeQuery();
